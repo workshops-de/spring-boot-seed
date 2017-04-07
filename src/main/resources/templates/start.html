@@ -1,10 +1,33 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hello world!</title>
+    <title>Book list</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    Hello world!
+    <h1>Book list</h1>
+  
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Subtitle</th>
+        <th>ISBN</th>
+        <th>Abstract</th>
+        <th>Pages</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Publisher Website</th>
+      </tr>
+      <tr th:each="b : ${books}">
+        <td th:text="${b.title}"></td>
+        <td th:text="${b.subtitle}"></td>
+        <td th:text="${b.isbn}"></td>
+        <td th:text="${b.abstractText}"></td>
+        <td th:text="${b.numPages}"></td>
+        <td th:text="${b.author}"></td>
+        <td th:text="${b.publisher.name}"></td>
+        <td th:text="${b.publisher.url}"></td>
+      </tr>
+    </table>
 </body>
 </html>
