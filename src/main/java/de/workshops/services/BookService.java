@@ -1,22 +1,19 @@
-package de.workshops.controller;
+package de.workshops.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Component;
 
 import de.workshops.model.Book;
 import de.workshops.model.Publisher;
 
-
-@Controller
-public class StartController {
-
-	@RequestMapping("/")
-    public String start(Model model) {
-		List<Book> books = new ArrayList<>();
+@Component
+public class BookService {
+	private List<Book> books;
+	
+	public BookService() {
+		this.books = new ArrayList<>();
 		
 		Publisher addisonWesley = new Publisher();
 		addisonWesley.setName("Addison-Wesley");
@@ -55,10 +52,13 @@ public class StartController {
 		eloquentJavaScript.setAuthor("Marijn Haverbeke");
 		eloquentJavaScript.setPublisher(noStarchPress);
 		books.add(eloquentJavaScript);
-		
-		model.addAttribute("books", books);
-		
-        return "start";
-    }
-}
+	}
 
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+}
