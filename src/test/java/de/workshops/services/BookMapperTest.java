@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import de.workshops.model.Book;
-import de.workshops.model.Publisher;
 
 public class BookMapperTest {
 
