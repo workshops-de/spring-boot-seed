@@ -1,8 +1,7 @@
 package de.workshops;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,23 +9,27 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Autowired
-	DataSource dataSource;
+	@Qualifier("userDetailsService")
+	private UserDetailsService userDetailsService;
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .mvcMatchers("GET", "/api/**").permitAll()
-                .anyRequest().fullyAuthenticated()
+                // .mvcMatchers("GET", "/api/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
             .httpBasic();
     }
@@ -34,11 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
     	auth
-    		.jdbcAuthentication()
-    			.dataSource(dataSource)
-    			.passwordEncoder(passwordEncoder())
-    			.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
-    			.authoritiesByUsernameQuery("SELECT username, role FROM user_roles WHERE username = ?");
+    		.userDetailsService(userDetailsService)
+    		.passwordEncoder(passwordEncoder());
     }
     
     @Override
