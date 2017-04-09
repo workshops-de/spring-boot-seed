@@ -1,15 +1,10 @@
 package de.workshops.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Book {
 	String title;
 	String subtitle;
 	String isbn;
-	@JsonIgnore
 	String abstractText;
-	@JsonProperty(value = "num_pages")
     Integer numPages;
     String author;
     Publisher publisher;
