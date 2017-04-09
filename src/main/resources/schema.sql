@@ -15,3 +15,17 @@ CREATE TABLE IF NOT EXISTS books (
   publisher_id INTEGER NOT NULL,
   FOREIGN KEY (publisher_id) REFERENCES publishers(id)
 );
+
+CREATE TABLE IF NOT EXISTS users (
+  username VARCHAR(512) PRIMARY KEY NOT NULL,
+  password VARCHAR(2048) NOT NULL,
+  enabled BOOLEAN DEFAULT FALSE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_roles (
+  id INTEGER IDENTITY PRIMARY KEY,
+  username VARCHAR(512) NOT NULL,
+  role VARCHAR(512) NOT NULL,
+  UNIQUE (role, username),
+  FOREIGN KEY (username) REFERENCES users(username)
+);
