@@ -1,5 +1,5 @@
-DELETE FROM publishers;
 DELETE FROM books;
+DELETE FROM publishers;
 
 INSERT INTO publishers (name, url) VALUES ('Addison-Wesley', 'http://www.addison-wesley.de/');
 INSERT INTO publishers (name, url) VALUES ('dpunkt.verlag', 'http://dpunkt.de/');

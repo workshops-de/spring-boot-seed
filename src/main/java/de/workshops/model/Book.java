@@ -1,6 +1,10 @@
 package de.workshops.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Book {
+	@JsonIgnore
+	Integer id;
 	String title;
 	String subtitle;
 	String isbn;
@@ -9,6 +13,12 @@ public class Book {
     String author;
     Publisher publisher;
     
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}

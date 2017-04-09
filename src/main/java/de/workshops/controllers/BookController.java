@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.workshops.model.Book;
@@ -26,17 +27,42 @@ public class BookController {
         return "books";
     }
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping("/books")
+	@RequestMapping("/api/books")
 	@ResponseBody
-    public List<Book> books(Model model) {
+    public List<Book> getBooks() {
 		return bookService.getBooks();
     }
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping("/book/{bookId}")
+	@RequestMapping("/api/book/{bookId}")
 	@ResponseBody
-    public Book book(@PathVariable int bookId, Model model) {
+    public Book getBook(@PathVariable int bookId) {
 		return bookService.getBook(bookId);
+    }
+	
+	@RequestMapping(
+			value = "/api/book",
+			method = RequestMethod.POST
+	)
+	@ResponseBody
+    public Book createBook(@RequestBody Book book) {
+		return bookService.createBook(book);
+    }
+	
+	@RequestMapping(
+			value = "/api/book",
+			method = RequestMethod.PUT
+	)
+	@ResponseBody
+    public Book updateBook(@RequestBody Book book) {
+		return bookService.updateBook(book);
+    }
+	
+	@RequestMapping(
+			value = "/api/book/{bookId}",
+			method = RequestMethod.DELETE
+	)
+	@ResponseBody
+    public String deleteBook(@PathVariable int bookId) {
+		return "OK";
     }
 }

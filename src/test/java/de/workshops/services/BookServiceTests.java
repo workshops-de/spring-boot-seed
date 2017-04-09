@@ -71,12 +71,12 @@ public class BookServiceTests {
     }
 	
 	@Test
-	public void testBookList() {
-		assert(bookService.getBooks().size() > 0);
+	public void testGetBookList() {
+		assertTrue(bookService.getBooks().size() > 0);
 	}
 	
 	@Test
-	public void testBookDetail() {
+	public void testGetBookDetail() {
 		Book book = bookService.getBook(0);
 		assertEquals("Design Patterns", book.getTitle());
 	}

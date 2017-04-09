@@ -1,9 +1,19 @@
 package de.workshops.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Publisher {
+	@JsonIgnore
+	Integer id;
 	String name;
 	String url;
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

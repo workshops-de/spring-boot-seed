@@ -16,6 +16,7 @@ public class BookMapperTest {
 	@Test
 	public void test() throws SQLException {
 		ResultSet resultSet = mock(ResultSet.class);
+		when(resultSet.getInt("book_id")).thenReturn(0);
 		when(resultSet.getString("title")).thenReturn("Design Patterns");
 		when(resultSet.getString("subtitle")).thenReturn("Elements of Reusable Object-Oriented Software");
 		when(resultSet.getString("isbn")).thenReturn("978-0-20163-361-0");
@@ -28,12 +29,14 @@ public class BookMapperTest {
         BookMapper bookMapper = new BookMapper();
         Book book = bookMapper.mapRow(resultSet, 1);
         
+        assertTrue(0 == book.getId());
         assertEquals("Design Patterns", book.getTitle());
         assertEquals("Elements of Reusable Object-Oriented Software", book.getSubtitle());
         assertEquals("978-0-20163-361-0", book.getIsbn());
         assertEquals("Capturing a wealth of experience about the design of object-oriented software, four top-notch designers present a catalog of simple and succinct solutions to commonly occurring design problems. Previously undocumented, these 23 patterns allow designers to create more flexible, elegant, and ultimately reusable designs without having to rediscover the design solutions themselves.", book.getAbstractText());
-        assert(395 == book.getNumPages());
+        assertTrue(395 == book.getNumPages());
         assertEquals("Erich Gamma / Richard Helm / Ralph E. Johnson / John Vlissides", book.getAuthor());
+        assertTrue(0 == book.getPublisher().getId());
         assertEquals("Addison-Wesley", book.getPublisher().getName());
         assertEquals("http://www.addison-wesley.de/", book.getPublisher().getUrl());
 	}
