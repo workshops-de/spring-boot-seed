@@ -19,4 +19,15 @@ public class BookService {
 		
 		return books;
 	}
+	
+	public Book getBook(int id) {
+		Book book =
+				jdbcTemplate.query(
+						"SELECT * FROM books b JOIN publishers p ON b.publisher_id = p.id WHERE b.id = ?",
+						new Object[] { id },
+						new BookMapper()
+				).get(0);
+		
+		return book;
+	}
 }

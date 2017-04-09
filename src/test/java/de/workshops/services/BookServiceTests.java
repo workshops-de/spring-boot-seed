@@ -1,5 +1,6 @@
 package de.workshops.services;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -66,10 +67,17 @@ public class BookServiceTests {
 		books.add(eloquentJavaScript);
 		
     	when(bookService.getBooks()).thenReturn(books);
+    	when(bookService.getBook(0)).thenReturn(designPatterns);
     }
 	
 	@Test
-	public void test() {
+	public void testBookList() {
 		assert(bookService.getBooks().size() > 0);
+	}
+	
+	@Test
+	public void testBookDetail() {
+		Book book = bookService.getBook(0);
+		assertEquals("Design Patterns", book.getTitle());
 	}
 }
