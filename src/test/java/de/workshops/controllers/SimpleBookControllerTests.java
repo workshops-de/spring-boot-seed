@@ -41,16 +41,14 @@ public class SimpleBookControllerTests {
     @Test
     public void testStartPage() throws Exception {
         this.mockMvc
-        		.perform(get("/")
-        		.accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
+        		.perform(get("/").accept(MediaType.parseMediaType("text/html;charset=UTF-8")))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testApi() throws Exception {
         this.mockMvc
-        		.perform(get("/api/books")
-        		.accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+        		.perform(get("/api/books").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"));
     }
