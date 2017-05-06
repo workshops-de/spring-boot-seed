@@ -1,4 +1,5 @@
 package de.workshops;
+
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
