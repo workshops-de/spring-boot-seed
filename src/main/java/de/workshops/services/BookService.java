@@ -28,12 +28,17 @@ public class BookService {
 	}
 	
 	public Book getBook(int id) {
-		Book book =
+		Book book = null;
+		
+		List<Book> books =
 				jdbcTemplate.query(
 						"SELECT b.title, b.subtitle, b.isbn, b.abstract_text, b.num_pages, b.author, b.publisher_id, b.id AS book_id, p.name, p.url FROM books b JOIN publishers p ON b.publisher_id = p.id WHERE b.id = ?",
 						new Object[] { id },
 						new BookMapper()
-				).get(0);
+				);
+		if (books.size() > 0) {
+			book = books.get(0);
+		}
 		
 		return book;
 	}

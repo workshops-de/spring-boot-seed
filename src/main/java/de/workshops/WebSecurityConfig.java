@@ -31,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // .mvcMatchers("GET", "/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .csrf().disable()
             .httpBasic();
     }
 
