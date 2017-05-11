@@ -25,10 +25,12 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
+	/*
 	@ResponseStatus(value = HttpStatus.CONFLICT, reason="Data integrity violation")
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public void handleConflict() {
 	}
+	*/
 
 	@RequestMapping("/")
     public String start(Model model) {
