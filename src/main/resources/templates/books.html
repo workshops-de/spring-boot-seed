@@ -19,14 +19,14 @@
         <th>Publisher Website</th>
       </tr>
       <tr th:each="b : ${books}">
-        <td th:text="${b.title}"></td>
+        <td><a th:href="${'/book/' + b.id}"><span th:text="${b.title}"></span></a></td>
         <td th:text="${b.subtitle}"></td>
-        <td th:text="${b.isbn}"></td>
+        <td><a th:href="${'/book/' + b.id}"><span th:text="${b.isbn}"></span></a></td>
         <td th:text="${b.abstractText}"></td>
         <td th:text="${b.numPages}"></td>
         <td th:text="${b.author}"></td>
         <td th:text="${b.publisher.name}"></td>
-        <td th:text="${b.publisher.url}"></td>
+        <td><a th:href="${b.publisher.url}"><span th:text="${b.publisher.url}"></span></a></td>
       </tr>
     </table>
 </body>

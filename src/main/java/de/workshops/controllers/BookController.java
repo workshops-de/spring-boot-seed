@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.workshops.model.Book;
 import de.workshops.model.ItemNotFoundException;
+import de.workshops.model.Purchase;
+import de.workshops.repositories.PurchaseRepository;
 import de.workshops.services.BookService;
 
 @Controller
@@ -21,12 +23,30 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	private PurchaseRepository purchaseRepository;
 
 	@RequestMapping("/")
     public String start(Model model) {
 		model.addAttribute("books", bookService.getBooks());
 		
         return "books";
+    }
+	
+	@RequestMapping("/book/{bookId}")
+    public String displayBook(@PathVariable int bookId, Model model) {
+		Book book = bookService.getBook(bookId);
+		if (book == null) {
+			throw new ItemNotFoundException();
+		}
+		
+		List<Purchase> purchases = purchaseRepository.findAllByBookId(bookId);
+		
+		model.addAttribute("book", book);
+		model.addAttribute("purchases", purchases);
+		
+        return "bookDetails";
     }
 	
 	@RequestMapping("/api/books")

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Book details</h1>
+  	<div class="details">
+  		<div>
+  			<strong>Title:</strong>
+  			<span th:text="${book.title}"></span>
+		</div>
+		<div>
+  			<strong>Subtitle:</strong>
+  			<span th:text="${book.subtitle}"></span>
+  		</div>
+  		<div>
+  			<strong>ISBN:</strong>
+  			<span th:text="${book.isbn}"></span>
+  		</div>
+		<div>
+  			<strong>Abstract:</strong>
+  			<span th:text="${book.abstractText}"></span>
+  		</div>
+		<div>
+  			<strong>Pages:</strong>
+  			<span th:text="${book.numPages}"></span>
+  		</div>
+		<div>
+  			<strong>Author:</strong>
+  			<span th:text="${book.author}"></span>
+  		</div>
+		<div>
+  			<strong>Publisher:</strong>
+  			<span th:text="${book.publisher.name}"></span>
+  		</div>
+		<div>
+  			<strong>Publisher Website:</strong>
+  			<a th:href="${book.publisher.url}"><span th:text="${book.publisher.url}"></span></a>
+  		</div>
+  	</div>
+  
+  	<h2>Purchases</h2>
+    <table>
+      <tr>
+        <th>Buyer</th>
+        <th>Purchase Date</th>
+      </tr>
+      <tr th:each="p : ${purchases}">
+        <td th:text="${p.buyer}"></td>
+        <td th:text="${p.purchaseDate}"></td>
+      </tr>
+    </table>
+</body>
+</html>
