@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import de.workshops.messaging.Message;
 import de.workshops.model.Book;
 import de.workshops.model.ItemNotFoundException;
 import de.workshops.model.Purchase;
@@ -26,6 +28,9 @@ public class BookController {
 	
 	@Autowired
 	private PurchaseRepository purchaseRepository;
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
 
 	@RequestMapping("/")
     public String start(Model model) {
@@ -45,6 +50,8 @@ public class BookController {
 		
 		model.addAttribute("book", book);
 		model.addAttribute("purchases", purchases);
+		
+		jmsTemplate.convertAndSend("inbox", new Message("Book displayed: " + bookId));
 		
         return "bookDetails";
     }
