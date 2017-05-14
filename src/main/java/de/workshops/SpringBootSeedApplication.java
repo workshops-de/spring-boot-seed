@@ -14,9 +14,13 @@ import de.workshops.repositories.PurchaseRepository;
 @SpringBootApplication
 public class SpringBootSeedApplication {
 
+	private final PurchaseRepository purchaseRepository;
+
 	@Autowired
-	private PurchaseRepository purchaseRepository;
-	
+	public SpringBootSeedApplication(PurchaseRepository purchaseRepository) {
+		this.purchaseRepository = purchaseRepository;
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootSeedApplication.class, args);
 	}
