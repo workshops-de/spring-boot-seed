@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import de.workshops.TestingHelper;
 import de.workshops.model.Book;
-import de.workshops.services.BookService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
