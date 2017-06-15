@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import de.workshops.model.Book;
 
-public class BookMapperTest {
+public class BookMapperTests {
 
 	@Test
 	public void test() throws SQLException {
