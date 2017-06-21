@@ -19,6 +19,7 @@ import de.workshops.model.ItemNotFoundException;
 import de.workshops.model.Purchase;
 import de.workshops.repositories.PurchaseRepository;
 import de.workshops.services.BookService;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BookController {
@@ -40,7 +41,7 @@ public class BookController {
     }
 	
 	@RequestMapping("/book/{bookId}")
-    public String displayBook(@PathVariable int bookId, Model model) {
+    public ModelAndView displayBook(@PathVariable int bookId, Model model) {
 		Book book = bookService.getBook(bookId);
 		if (book == null) {
 			throw new ItemNotFoundException();
@@ -52,8 +53,12 @@ public class BookController {
 		model.addAttribute("purchases", purchases);
 		
 		jmsTemplate.convertAndSend("inbox", new Message("Book displayed: " + bookId));
-		
-        return "bookDetails";
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject(book);
+		modelAndView.addObject(purchases);
+
+		return modelAndView;
     }
 	
 	@RequestMapping("/api/books")
