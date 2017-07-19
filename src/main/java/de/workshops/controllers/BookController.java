@@ -56,7 +56,7 @@ public class BookController {
         return "bookDetails";
     }
 	
-	@RequestMapping("/api/books")
+	@RequestMapping("/books")
 	@ResponseBody
     public List<Book> getBooks() {
 		return bookService.getBooks();
