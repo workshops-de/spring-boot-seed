@@ -32,7 +32,7 @@ public class BookControllerWithSecurityIntegrationTests {
     private BookService bookService;
 
     @Autowired
-    private WebApplicationContext wac;
+    private WebApplicationContext webApplicationContext;
 
     @Autowired
     private FilterChainProxy filterChainProxy;
@@ -42,7 +42,7 @@ public class BookControllerWithSecurityIntegrationTests {
         TestingHelper.mockBookService(bookService);
         MockitoAnnotations.initMocks(this);
         MockitoAnnotations.initMocks(this);
-        this.mockMvc = webAppContextSetup(wac).addFilters(filterChainProxy).build();
+        this.mockMvc = webAppContextSetup(webApplicationContext).addFilters(filterChainProxy).build();
     }
 
     @Test
