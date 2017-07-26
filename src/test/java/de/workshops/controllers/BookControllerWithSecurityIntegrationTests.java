@@ -41,7 +41,6 @@ public class BookControllerWithSecurityIntegrationTests {
     public void setup() {
         TestingHelper.mockBookService(bookService);
         MockitoAnnotations.initMocks(this);
-        MockitoAnnotations.initMocks(this);
         this.mockMvc = webAppContextSetup(webApplicationContext).addFilters(filterChainProxy).build();
     }
 
